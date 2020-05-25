@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 
+#include <QDebug>
 #include <QApplication>
+#include "array.h"
 
 int main(int argc, char *argv[])
 {
