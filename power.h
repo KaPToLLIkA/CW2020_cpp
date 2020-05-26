@@ -46,13 +46,32 @@ public:
         return new QTableWidgetItem(w);
     }
 
-    QDataStream& toQDataSteam(QDataStream &stream, Trainer &obj) override {
+    void toQDataSteam(QDataStream &stream) override {
+        stream << size.x;
+        stream << size.y;
+        stream << size.z;
+        stream << weigth;
+        stream << manufacturer;
+        stream << model;
+        stream << name;
+        stream << description;
+        stream << otherCharacteristics;
+        stream << maxLoad;
+        stream << maxUserWeight;
 
-        return stream;
     }
-    QDataStream& fromQDataSteam(QDataStream &stream, Trainer &obj) override {
-
-        return stream;
+    void fromQDataSteam(QDataStream &stream) override {
+        stream >> size.x;
+        stream >> size.y;
+        stream >> size.z;
+        stream >> weigth;
+        stream >> manufacturer;
+        stream >> model;
+        stream >> name;
+        stream >> description;
+        stream >> otherCharacteristics;
+        stream >> maxLoad;
+        stream >> maxUserWeight;
     }
 };
 

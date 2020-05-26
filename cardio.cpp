@@ -2,5 +2,5 @@
 
 CardioTrainer::CardioTrainer()
 {
-
+    type = Cardio;
 }

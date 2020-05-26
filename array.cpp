@@ -57,3 +57,14 @@ void array::insertAt(uint64_t index, DataType value)
     memcpy(&(data[index + 1]), &(data[index]), sizeof(DataType) * (size - index));
     data[index] = value;
 }
+
+void array::clear()
+{
+   for(uint64_t i = 0; i < size; ++i)
+       delete data[i];
+   size = 0;
+   allocatedSize = 1;
+   delete[] data;
+   data = new DataType[1];
+
+}

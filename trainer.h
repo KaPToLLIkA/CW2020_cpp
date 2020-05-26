@@ -94,8 +94,8 @@ public:
     }
 
 
-    virtual QDataStream& toQDataSteam(QDataStream &stream, Trainer &obj) = 0;
-    virtual QDataStream& fromQDataSteam(QDataStream &stream, Trainer &obj) = 0;
+    virtual void toQDataSteam(QDataStream &stream) = 0;
+    virtual void fromQDataSteam(QDataStream &stream) = 0;
     virtual ~Trainer() {
 
     }

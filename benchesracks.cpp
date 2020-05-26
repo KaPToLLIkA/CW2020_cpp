@@ -2,5 +2,5 @@
 
 BenchesRacksTrainer::BenchesRacksTrainer()
 {
-
+    type = BenchesRacks;
 }

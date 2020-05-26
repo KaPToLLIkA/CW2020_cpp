@@ -2,5 +2,5 @@
 
 PowerTrainer::PowerTrainer()
 {
-
+    type = Power;
 }

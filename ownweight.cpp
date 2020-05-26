@@ -2,5 +2,5 @@
 
 OwnWeightTrainer::OwnWeightTrainer()
 {
-
+    type = OwnWeight;
 }

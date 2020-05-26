@@ -18,7 +18,7 @@ public:
                   QString _description,
                   QString _otherCharacteristics,
                   QString _typeOfLoad):
-        Trainer(Power, _size, _weight, _manufacturer,
+        Trainer(Cardio, _size, _weight, _manufacturer,
                 _model, _name, _description, _otherCharacteristics),
         typeOfLoad(_typeOfLoad) {}
 
@@ -31,13 +31,30 @@ public:
         return new QTableWidgetItem(typeOfLoad);
     }
 
-    QDataStream& toQDataSteam(QDataStream &stream, Trainer &obj) override {
+    void toQDataSteam(QDataStream &stream) override {
+        stream << size.x;
+        stream << size.y;
+        stream << size.z;
+        stream << weigth;
+        stream << manufacturer;
+        stream << model;
+        stream << name;
+        stream << description;
+        stream << otherCharacteristics;
+        stream << typeOfLoad;
 
-        return stream;
     }
-    QDataStream& fromQDataSteam(QDataStream &stream, Trainer &obj) override {
-
-        return stream;
+    void fromQDataSteam(QDataStream &stream) override {
+        stream >> size.x;
+        stream >> size.y;
+        stream >> size.z;
+        stream >> weigth;
+        stream >> manufacturer;
+        stream >> model;
+        stream >> name;
+        stream >> description;
+        stream >> otherCharacteristics;
+        stream >> typeOfLoad;
     }
 };
 

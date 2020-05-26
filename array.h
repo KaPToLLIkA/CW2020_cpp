@@ -1,23 +1,14 @@
 #ifndef ARRAY_H
 #define ARRAY_H
+#include "trainer.h"
+
 #include <QString>
 #include <memory.h>
 #include <stdint.h>
 
 
-
-class Test {
-
-
-public:
-    QString text;
-    Test(QString inText): text(inText) {}
-};
-
-
-
 //mandatory typedef
-typedef Test* DataType;
+typedef Trainer* DataType;
 
 class array
 {
@@ -43,6 +34,7 @@ public:
     void eraseElement(uint64_t index);
     void replaceAt(uint64_t index, DataType value);
     void insertAt(uint64_t index, DataType value);
+    void clear();
 
     DataType operator[](uint64_t index) {
         if (index >= size) return nullptr;
