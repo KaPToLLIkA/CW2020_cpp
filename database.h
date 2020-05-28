@@ -15,10 +15,16 @@
 struct SearchRequest {
 
     TrainerType type;
-    QString name;
-    QString model;
-    QString manufacturer;
+    QRegExp name;
+    QRegExp model;
+    QRegExp manufacturer;
     double weightMax, weightMin;
+
+    bool typeSearchEnabled = false;
+    bool nameSearchEnabled = false;
+    bool modelSearchEnabled = false;
+    bool manufacturerSearchEnabled = false;
+    bool weightSearchEnabled = false;
 
 };
 
@@ -36,12 +42,22 @@ private:
     Trainer* getObjectFromStream(QDataStream &stream);
 
 public:
+    void addTrainer(DataType newTrainer);
+    void eraseTrainer(uint64_t index);
+    DataType getTrainer(uint64_t index);
+    DataType getLastTrainer();
+    void replaceTrainerAt(uint64_t index, DataType newTrainer);
+    uint64_t getLength();
+    QString getFilePath();
+    void clearData();
+    bool searchTo(uint64_t index, SearchRequest &request);
 
-    void save();
+
+    void save(QWidget *parent);
     bool saveAs(QWidget *parent);
     bool open(QWidget *parent);
 
-    const array& getData() {return data;}
+    bool getOpenedExistFlag();
 
 };
 

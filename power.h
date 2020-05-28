@@ -11,7 +11,19 @@ private:
     double maxLoad;
     double maxUserWeight;
 public:
-    PowerTrainer(Vector3D<double> _size,
+    explicit PowerTrainer();
+
+
+    explicit PowerTrainer(Trainer t,
+                          double _maxLoad,
+                          double _maxUserWeight) :
+        Trainer(Power, t),
+        maxLoad(_maxLoad),
+        maxUserWeight(_maxUserWeight)
+    {}
+
+
+    explicit PowerTrainer(Vector3D<double> _size,
                  double _weight,
                  QString _manufacturer,
                  QString _model,
@@ -23,9 +35,10 @@ public:
         Trainer(Power, _size, _weight, _manufacturer,
                 _model, _name, _description, _otherCharacteristics),
         maxLoad(_maxLoad),
-        maxUserWeight(_maxUserWeight) {}
+        maxUserWeight(_maxUserWeight)
+    {}
 
-    PowerTrainer();
+
 
 
     double getMaxLoad() { return maxLoad; }
@@ -44,6 +57,21 @@ public:
         QString w;
         w.setNum(maxUserWeight);
         return new QTableWidgetItem(w);
+    }
+
+
+    void getItems(ItemsData& items) override {
+        items[0] = getItemType();
+        items[1] = getItemName();
+        items[2] = getItemManufacturer();
+        items[3] = getItemModel();
+        items[4] = getItemXYZ();
+        items[5] = getItemWeight();
+        items[6] = getItemOtherCharacteristics();
+        items[7] = getItemDescription();
+        items[8] = getItemEmpty();
+        items[9] = getItemMaxLoad();
+        items[10] = getItemMaxUserWeight();
     }
 
     void toQDataSteam(QDataStream &stream) override {

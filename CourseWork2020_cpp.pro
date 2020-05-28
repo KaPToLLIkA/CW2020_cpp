@@ -16,11 +16,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    about.cpp \
     addredodialog.cpp \
     array.cpp \
     benchesracks.cpp \
     cardio.cpp \
+    constarray.cpp \
     database.cpp \
+    instruction.cpp \
     main.cpp \
     mainwindow.cpp \
     ownweight.cpp \
@@ -28,21 +31,29 @@ SOURCES += \
     trainer.cpp
 
 HEADERS += \
+    about.h \
     addredodialog.h \
     array.h \
     benchesracks.h \
     cardio.h \
+    constarray.h \
     database.h \
+    instruction.h \
     mainwindow.h \
     ownweight.h \
     power.h \
     trainer.h
 
 FORMS += \
+    about.ui \
     addredodialog.ui \
+    instruction.ui \
     mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    Resources.qrc

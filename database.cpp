@@ -36,9 +36,92 @@ Trainer *DataBase::getObjectFromStream(QDataStream &stream)
     return obj;
 }
 
-void DataBase::save()
+void DataBase::addTrainer(DataType newTrainer)
 {
-    if(!openedExist) return;
+    data.addElement(newTrainer);
+}
+
+void DataBase::eraseTrainer(uint64_t index)
+{
+    data.eraseElement(index);
+}
+
+DataType DataBase::getTrainer(uint64_t index)
+{
+    return data.at(index);
+}
+
+DataType DataBase::getLastTrainer()
+{
+    return data.at(data.length() - 1);
+}
+
+void DataBase::replaceTrainerAt(uint64_t index, DataType newTrainer)
+{
+    data.replaceAt(index, newTrainer);
+}
+
+uint64_t DataBase::getLength()
+{
+    return data.length();
+}
+
+QString DataBase::getFilePath()
+{
+    return path;
+}
+
+void DataBase::clearData()
+{
+    data.clear();
+}
+
+bool DataBase::searchTo(uint64_t index, SearchRequest &request)
+{
+    bool searchResult = true;
+    if(request.nameSearchEnabled) {
+        if(!request.name.exactMatch(data[index]->getName())) {
+            searchResult = false;
+        }
+    }
+
+    if(request.modelSearchEnabled) {
+        if(!request.model.exactMatch(data[index]->getModel())) {
+            searchResult = false;
+        }
+    }
+
+    if(request.manufacturerSearchEnabled) {
+        if(!request.manufacturer.exactMatch(data[index]->getManufcturer())) {
+            searchResult = false;
+        }
+    }
+
+
+    if(request.weightSearchEnabled) {
+        if(data[index]->getWeight() < request.weightMin
+        || data[index]->getWeight() > request.weightMax) {
+            searchResult = false;
+        }
+    }
+
+    if(request.typeSearchEnabled) {
+        if(request.type != data[index]->getType()) {
+            searchResult = false;
+        }
+
+    }
+
+    return searchResult;
+}
+
+void DataBase::save(QWidget *parent)
+{
+    if(!openedExist)
+    {
+        saveAs(parent);
+        return;
+    }
 
     QFile outFile(path);
     outFile.open(QIODevice::WriteOnly);
@@ -59,7 +142,7 @@ bool DataBase::saveAs(QWidget *parent)
     path = tmpPath;
     openedExist = true;
 
-    save();
+    save(parent);
     return true;
 }
 
@@ -84,4 +167,9 @@ bool DataBase::open(QWidget *parent)
     }
 
     return true;
+}
+
+bool DataBase::getOpenedExistFlag()
+{
+    return openedExist;
 }

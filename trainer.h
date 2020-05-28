@@ -1,8 +1,12 @@
 #ifndef TRAINER_H
 #define TRAINER_H
 
+#include "constarray.h"
+
 #include <QTableWidget>
 #include <qstring.h>
+
+
 
 
 enum TrainerType {
@@ -14,6 +18,8 @@ enum TrainerType {
 
 template <typename T>
 struct Vector3D {
+    Vector3D(): x(0), y(0), z(0) {}
+    Vector3D(T _x, T _y, T _z): x(_x), y(_y), z(_z) {}
     T x,y,z;
 };
 
@@ -30,8 +36,19 @@ protected:
     QString description;
     QString otherCharacteristics;
 public:
-    Trainer();
-    Trainer(TrainerType _type,
+    static const uint64_t MAX_ITEMS_COUNT = 11;
+    explicit Trainer();
+    explicit Trainer(TrainerType _type, Trainer t) :
+        type(_type),
+        size(t.size),
+        weigth(t.weigth),
+        manufacturer(t.manufacturer),
+        model(t.model),
+        name(t.name),
+        description(t.description),
+        otherCharacteristics(t.otherCharacteristics)
+    {}
+    explicit Trainer(TrainerType _type,
             Vector3D<double> _size,
             double _weight,
             QString _manufacturer,
@@ -53,7 +70,8 @@ public:
     QString getName() { return name; }
     QString getDescription() { return description; }
     QString getModel() { return model; }
-    double getWieght() { return weigth; }
+    QString getOtherCharacteristics() { return otherCharacteristics; }
+    double getWeight() { return weigth; }
     TrainerType getType() { return type; }
     Vector3D<double> getXYZ() {return size; }
 
@@ -67,18 +85,20 @@ public:
 
     QTableWidgetItem* getItemType() {
         switch (type) {
-        case Power: return new QTableWidgetItem("Power");
-        case Cardio: return new QTableWidgetItem("Cardio");
-        case OwnWeight: return new QTableWidgetItem("Own weight");
-        case BenchesRacks: return new QTableWidgetItem("Benches or racks");
+        case Power: return new QTableWidgetItem("Силовой\nтренажёр");
+        case Cardio: return new QTableWidgetItem("Кардио\nтренажёр");
+        case OwnWeight: return new QTableWidgetItem("Тренажёр с\nсобственным\nвесом");
+        case BenchesRacks: return new QTableWidgetItem("Скамьи\nи стойки");
         }
+        return new QTableWidgetItem("");
     }
 
     QTableWidgetItem* getItemManufacturer() { return new QTableWidgetItem(manufacturer);}
     QTableWidgetItem* getItemName() { return new QTableWidgetItem(name);}
     QTableWidgetItem* getItemDescription() { return new QTableWidgetItem(description);}
     QTableWidgetItem* getItemModel() { return new QTableWidgetItem(model);}
-    QTableWidgetItem* getWeight() {
+    QTableWidgetItem* getItemOtherCharacteristics() { return new QTableWidgetItem(otherCharacteristics);}
+    QTableWidgetItem* getItemWeight() {
         QString w;
         w.setNum(weigth);
         return new QTableWidgetItem(w);
@@ -89,16 +109,19 @@ public:
         QString y; y.setNum(size.y);
         QString z; z.setNum(size.z);
         return new QTableWidgetItem(
-                    "width: " + x + "; length: " + y + "; height: " + z
+                    "длина: " + x + "; ширина: " + y + "; высота: " + z
                     );
     }
+    QTableWidgetItem* getItemEmpty() { return new QTableWidgetItem(""); }
 
-
-    virtual void toQDataSteam(QDataStream &stream) = 0;
-    virtual void fromQDataSteam(QDataStream &stream) = 0;
+    virtual void getItems(ConstArray<QTableWidgetItem*, Trainer::MAX_ITEMS_COUNT>& items) {}
+    virtual void toQDataSteam(QDataStream &stream) {}
+    virtual void fromQDataSteam(QDataStream &stream) {}
     virtual ~Trainer() {
 
     }
 };
+
+typedef ConstArray<QTableWidgetItem*, Trainer::MAX_ITEMS_COUNT> ItemsData;
 
 #endif // TRAINER_H

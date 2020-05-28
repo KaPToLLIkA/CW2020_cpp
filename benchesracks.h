@@ -10,7 +10,13 @@ class BenchesRacksTrainer : public Trainer
 private:
     QString typeOfLoad;
 public:
-    BenchesRacksTrainer(Vector3D<double> _size,
+    explicit BenchesRacksTrainer(Trainer t, QString _typeOfLoad):
+        Trainer(BenchesRacks, t),
+        typeOfLoad(_typeOfLoad)
+    {}
+
+
+    explicit BenchesRacksTrainer(Vector3D<double> _size,
                         double _weight,
                         QString _manufacturer,
                         QString _model,
@@ -22,13 +28,28 @@ public:
                 _model, _name, _description, _otherCharacteristics),
         typeOfLoad(_typeOfLoad) {}
 
-    BenchesRacksTrainer();
+    explicit BenchesRacksTrainer();
 
 
     QString getTypeOfLoad() {return typeOfLoad;}
 
     QTableWidgetItem* getItemTypeOfLoad() {
         return new QTableWidgetItem(typeOfLoad);
+    }
+
+    void getItems(ItemsData& items) override {
+        items[0] = getItemType();
+        items[1] = getItemName();
+        items[2] = getItemManufacturer();
+        items[3] = getItemModel();
+        items[4] = getItemXYZ();
+        items[5] = getItemWeight();
+        items[6] = getItemOtherCharacteristics();
+        items[7] = getItemDescription();
+        items[8] = getItemTypeOfLoad();
+        items[9] = getItemEmpty();
+        items[10] = getItemEmpty();
+
     }
 
     void toQDataSteam(QDataStream &stream) override {

@@ -8,7 +8,11 @@
 class OwnWeightTrainer : public Trainer
 {
 public:
-    OwnWeightTrainer(Vector3D<double> _size,
+    explicit OwnWeightTrainer();
+
+    explicit OwnWeightTrainer(Trainer t): Trainer(OwnWeight, t) {}
+
+    explicit OwnWeightTrainer(Vector3D<double> _size,
                      double _weight,
                      QString _manufacturer,
                      QString _model,
@@ -16,10 +20,25 @@ public:
                      QString _description,
                      QString _otherCharacteristics):
         Trainer(OwnWeight, _size, _weight, _manufacturer,
-                _model, _name, _description, _otherCharacteristics) {}
+                _model, _name, _description, _otherCharacteristics)
+    {}
 
-    OwnWeightTrainer();
 
+
+
+    void getItems(ItemsData& items) override {
+        items[0] = getItemType();
+        items[1] = getItemName();
+        items[2] = getItemManufacturer();
+        items[3] = getItemModel();
+        items[4] = getItemXYZ();
+        items[5] = getItemWeight();
+        items[6] = getItemOtherCharacteristics();
+        items[7] = getItemDescription();
+        items[8] = getItemEmpty();
+        items[9] = getItemEmpty();
+        items[10] = getItemEmpty();
+    }
 
 
     void toQDataSteam(QDataStream &stream) override {

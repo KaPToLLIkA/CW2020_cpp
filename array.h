@@ -23,7 +23,7 @@ private:
 public:
 
 
-    array() : data(new DataType[1]), size(0), allocatedSize(1) {}
+    explicit array() : data(new DataType[1]), size(0), allocatedSize(1) {}
 
     uint64_t length() { return size; }
     DataType at(uint64_t index) {
@@ -40,6 +40,11 @@ public:
         if (index >= size) return nullptr;
         return data[index];
     }
+
+
+    ~array() {delete[] data;}
 };
+
+
 
 #endif // ARRAY_H

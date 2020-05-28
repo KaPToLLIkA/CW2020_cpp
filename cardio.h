@@ -10,7 +10,14 @@ class CardioTrainer : public Trainer
 private:
     QString typeOfLoad;
 public:
-    CardioTrainer(Vector3D<double> _size,
+    explicit CardioTrainer();
+
+    explicit CardioTrainer(Trainer t, QString _typeOfLoad):
+        Trainer(Cardio, t),
+        typeOfLoad(_typeOfLoad)
+    {}
+
+    explicit CardioTrainer(Vector3D<double> _size,
                   double _weight,
                   QString _manufacturer,
                   QString _model,
@@ -20,16 +27,34 @@ public:
                   QString _typeOfLoad):
         Trainer(Cardio, _size, _weight, _manufacturer,
                 _model, _name, _description, _otherCharacteristics),
-        typeOfLoad(_typeOfLoad) {}
+        typeOfLoad(_typeOfLoad)
+    {}
 
 
-    CardioTrainer();
+
 
     QString getTypeOfLoad() {return typeOfLoad;}
 
     QTableWidgetItem* getItemTypeOfLoad() {
         return new QTableWidgetItem(typeOfLoad);
     }
+
+
+    void getItems(ItemsData& items) override {
+        items[0] = getItemType();
+        items[1] = getItemName();
+        items[2] = getItemManufacturer();
+        items[3] = getItemModel();
+        items[4] = getItemXYZ();
+        items[5] = getItemWeight();
+        items[6] = getItemOtherCharacteristics();
+        items[7] = getItemDescription();
+        items[8] = getItemTypeOfLoad();
+        items[9] = getItemEmpty();
+        items[10] = getItemEmpty();
+
+    }
+
 
     void toQDataSteam(QDataStream &stream) override {
         stream << size.x;

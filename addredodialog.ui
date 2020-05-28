@@ -43,7 +43,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_3"/>
+         <widget class="QDoubleSpinBox" name="doubleSpinBoxX"/>
         </item>
         <item>
          <widget class="QLabel" name="label_3">
@@ -56,7 +56,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
+         <widget class="QDoubleSpinBox" name="doubleSpinBoxY"/>
         </item>
         <item>
          <widget class="QLabel" name="label_4">
@@ -69,7 +69,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_2"/>
+         <widget class="QDoubleSpinBox" name="doubleSpinBoxZ"/>
         </item>
        </layout>
       </item>
@@ -86,7 +86,7 @@
       <item row="13" column="0">
        <widget class="QLabel" name="label_12">
         <property name="text">
-         <string>Максимальный вес пользователя:</string>
+         <string>Максимальный вес пользователя (кг):</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -111,7 +111,7 @@
        </widget>
       </item>
       <item row="11" column="1">
-       <widget class="QTextEdit" name="textEdit"/>
+       <widget class="QTextEdit" name="textEditOtherCharacteristics"/>
       </item>
       <item row="11" column="0">
        <widget class="QLabel" name="label_10">
@@ -124,7 +124,7 @@
        </widget>
       </item>
       <item row="7" column="1">
-       <widget class="QLineEdit" name="lineEdit_2"/>
+       <widget class="QLineEdit" name="lineEditModel"/>
       </item>
       <item row="2" column="1">
        <spacer name="verticalSpacer">
@@ -153,13 +153,13 @@
        </widget>
       </item>
       <item row="6" column="1">
-       <widget class="QLineEdit" name="lineEdit"/>
+       <widget class="QLineEdit" name="lineEditManufacturer"/>
       </item>
       <item row="8" column="1">
-       <widget class="QLineEdit" name="lineEdit_3"/>
+       <widget class="QLineEdit" name="lineEditName"/>
       </item>
       <item row="14" column="1">
-       <widget class="QLineEdit" name="lineEdit_6"/>
+       <widget class="QLineEdit" name="lineEditTypeOfLoad"/>
       </item>
       <item row="9" column="0">
        <widget class="QLabel" name="label_9">
@@ -172,12 +172,12 @@
        </widget>
       </item>
       <item row="13" column="1">
-       <widget class="QDoubleSpinBox" name="doubleSpinBox_5"/>
+       <widget class="QDoubleSpinBox" name="doubleSpinBoxMaxUserWeight"/>
       </item>
       <item row="12" column="0">
        <widget class="QLabel" name="label_11">
         <property name="text">
-         <string>Максимальная рабочая нагрузка:</string>
+         <string>Максимальная рабочая нагрузка (кг):</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -187,7 +187,7 @@
       <item row="4" column="0">
        <widget class="QLabel" name="label_5">
         <property name="text">
-         <string>Габариты тренажёра:</string>
+         <string>Габариты тренажёра (см):</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -195,7 +195,33 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QComboBox" name="comboBox"/>
+       <widget class="QComboBox" name="comboBoxTrainerType">
+        <item>
+         <property name="text">
+          <string>Выбрать...</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Силовой тренажёр</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Кардио тренажёр</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Тренажёр с собственным весом</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Скамьи и стойки</string>
+         </property>
+        </item>
+       </widget>
       </item>
       <item row="14" column="0">
        <widget class="QLabel" name="label_13">
@@ -215,21 +241,25 @@
        </widget>
       </item>
       <item row="12" column="1">
-       <widget class="QDoubleSpinBox" name="doubleSpinBox_4"/>
+       <widget class="QDoubleSpinBox" name="doubleSpinBoxMaxLoadWeight"/>
       </item>
       <item row="9" column="1">
-       <widget class="QLineEdit" name="lineEdit_4"/>
-      </item>
-      <item row="5" column="1">
-       <widget class="QDoubleSpinBox" name="doubleSpinBox_6"/>
+       <widget class="QLineEdit" name="lineEditDescription"/>
       </item>
       <item row="5" column="0">
        <widget class="QLabel" name="label_14">
         <property name="text">
-         <string>Масса тренажёра:</string>
+         <string>Масса тренажёра (кг):</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QDoubleSpinBox" name="doubleSpinBoxTrainerWeight">
+        <property name="maximum">
+         <double>999999.989999999990687</double>
         </property>
        </widget>
       </item>
